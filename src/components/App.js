@@ -8,25 +8,17 @@ const App = () => {
 
   const [input , setInput] = useState("");
 
-
-
-  const show = () =>{
-    if(input.value){
-      return searchArray.map((item)=>console.log(item))
-    }
-  }
-  
   return (
     <div id="main">
-      <input type="text" id='search-input' onChange={show}/>
-      <ul onChange={(e)=>{
-        setInput(e.target.value)
-      }}>
-      {searchArray.map((item, index)=>{
+      <input type="text" value={input} id='search-input' onChange={e=>setInput(e.target.value)}/>
+      <ul>
+      {searchArray.filter(name => name.match(new RegExp(input , "i")))
+      .map(name=>{
         return (
-          <li key={index} value={input}>{item}</li>
+            <li key={name}>{name}</li>
         )
-      })}
+      })
+      }
       </ul>
     </div>
   )
